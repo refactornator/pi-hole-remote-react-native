@@ -47,7 +47,8 @@ const Store = types
       let url = `${API_URL}?auth=${self.token}`;
       self.statusState = 'loading';
       if (self.status === 'enabled') {
-        url += '&disable=0';
+        const fifteenMinutes = 15 * 60;
+        url += `&disable=${fifteenMinutes}`;
         self.status = 'disabled';
       } else if (self.status === 'disabled') {
         url += '&enable';
