@@ -1,16 +1,24 @@
 import React from 'react';
-import { StyleSheet, Image, Text, View } from 'react-native';
+import {
+  TouchableHighlight,
+  StyleSheet,
+  Image,
+  Text,
+  View
+} from 'react-native';
 
-export default ({ status, pendingStatusChange }) => {
+export default ({ status, clearToken }) => {
   let content = 'Cannot find Pi-Hole';
   if (status) {
     content = 'Connected to Pi-Hole';
   }
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} source={require('../assets/logo.png')} />
-      <Text>{content}</Text>
-    </View>
+    <TouchableHighlight onPress={clearToken}>
+      <View style={styles.container}>
+        <Image style={styles.logo} source={require('../assets/logo.png')} />
+        <Text>{content}</Text>
+      </View>
+    </TouchableHighlight>
   );
 };
 

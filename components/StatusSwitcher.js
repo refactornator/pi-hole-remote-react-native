@@ -7,35 +7,27 @@ import {
   View
 } from 'react-native';
 
-const StatusSwitcher = ({ status, pendingStatusChange, toggleBlocking }) => {
-  if (status) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Blocking Status</Text>
-        <View style={styles.switchContainer}>
-          <Text>Disabled</Text>
-          <Switch
-            style={styles.switch}
-            value={status === 'enabled'}
-            disabled={pendingStatusChange}
-            onValueChange={toggleBlocking}
-          />
-          <Text>Enabled</Text>
-        </View>
-        <ActivityIndicator
-          hidesWhenStopped={true}
-          animating={pendingStatusChange}
-          size="small"
-          color="#0000ff"
-        />
-      </View>
-    );
-  } else {
-    return null;
-  }
-};
-
-export default StatusSwitcher;
+export default ({ status, statusState, toggleBlocking }) => (
+  <View style={styles.container}>
+    <Text style={styles.title}>Blocking Status</Text>
+    <View style={styles.switchContainer}>
+      <Text>Disabled</Text>
+      <Switch
+        style={styles.switch}
+        value={status === 'enabled'}
+        disabled={statusState === 'loading'}
+        onValueChange={toggleBlocking}
+      />
+      <Text>Enabled</Text>
+    </View>
+    <ActivityIndicator
+      hidesWhenStopped={true}
+      animating={statusState === 'loading'}
+      size="small"
+      color="#0000ff"
+    />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
